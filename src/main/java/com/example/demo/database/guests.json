@@ -1,0 +1,86 @@
+[
+  {
+    "dni": 12345678,
+    "name": "Sebastián",
+    "surname": "Gonzalez",
+    "birthDate": "25/10/1960",
+    "email": "seba_gonzalez@unmail.com"
+  },
+  {
+    "dni": 87654321,
+    "name": "Leonela",
+    "surname": "Ferreyra",
+    "birthDate": "12/04/1986",
+    "email": "lea_ferre_123@otromail.com"
+  },
+  {
+    "dni": 21553224,
+    "name": "Karina",
+    "surname": "Soluk",
+    "birthDate": "05/08/1976",
+    "email": "kari_solu_76@gmail.com"
+  },
+  {
+    "dni": 31501224,
+    "name": "Matias",
+    "surname": "Nichols",
+    "birthDate": "27/03/1985",
+    "email": "nicholma@unmail.com"
+  },
+  {
+    "dni": 36061558,
+    "name": "Alejandra",
+    "surname": "Román",
+    "birthDate": "23/11/1992",
+    "email": "romanale_92@gmail.com"
+  },
+  {
+    "dni": 40555699,
+    "name": "Gabriel",
+    "surname": "Barrios",
+    "birthDate": "16/07/1998",
+    "email": "gabibarrios98@otromail.com"
+  },
+  {
+    "dni": 26554231,
+    "name": "Avril",
+    "surname": "Lavigne",
+    "birthDate": "27/09/1984",
+    "email": "avrillavigne@complicated.com"
+  },
+  {
+    "dni": 25333213,
+    "name": "Zlatan",
+    "surname": "Ibrahimovic",
+    "birthDate": "03/10/1981",
+    "email": "imzlatan@acmilan.com"
+  },
+  {
+    "dni": 32566572,
+    "name": "James",
+    "surname": "Rodriguez",
+    "birthDate": "12/07/1991",
+    "email": "james@everton.com"
+  },
+  {
+    "dni": 19558192,
+    "name": "Cristiano",
+    "surname": "Ronaldo",
+    "birthDate": "05/02/1985",
+    "email": "cristiano@juventus.com"
+  },
+  {
+    "dni": 18325671,
+    "name": "Kylian ",
+    "surname": "Mbappé",
+    "birthDate": "20/12/1998",
+    "email": "mbappe@PSG.com"
+  },
+  {
+    "dni": 92224562,
+    "name": "Rubén",
+    "surname": "Doblas",
+    "birthDate": "13/02/1990",
+    "email": "el_rubius@youtube.com"
+  }
+]
