@@ -1,9 +1,9 @@
-package com.example.demo.databaseTests;
+package com.example.demo.MockTests.databaseTests;
 
 import com.example.demo.DTO.HotelDTO;
 import com.example.demo.database.Database;
 import com.example.demo.database.Impl.DatabasesImpl;
-import com.example.demo.component.TestUtils;
+import com.example.demo.utils.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,0 +1,42 @@
+[
+    {
+      "hotelCode": "SE-0002",
+      "name": "Selina",
+      "location": "Bogotá",
+      "roomType": "Doble",
+      "pricePerNight": 5840,
+      "availableFrom": "23/01/2021",
+      "availableUntil": "15/10/2021",
+      "reserved": false
+    },
+    {
+    "hotelCode": "EC-0003",
+    "name": "El Campín",
+    "location": "Bogotá",
+    "roomType": "Triple",
+    "pricePerNight": 7020,
+    "availableFrom": "15/02/2021",
+    "availableUntil": "27/03/2021",
+    "reserved": false
+    },
+    {
+    "hotelCode": "CP-0004",
+    "name": "Central Plaza",
+    "location": "Medellín",
+    "roomType": "Múltiple",
+    "pricePerNight": 8600,
+    "availableFrom": "01/03/2021",
+    "availableUntil": "17/04/2021",
+    "reserved": false
+    },
+    {
+    "hotelCode": "CP-0002",
+    "name": "Central Plaza",
+    "location": "Barcelona",
+    "roomType": "Doble",
+    "pricePerNight": 6400,
+    "availableFrom": "10/02/2021",
+    "availableUntil": "20/03/2021",
+    "reserved": false
+    }
+]

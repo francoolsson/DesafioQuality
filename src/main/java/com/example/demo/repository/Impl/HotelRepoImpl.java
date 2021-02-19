@@ -25,13 +25,7 @@ public class HotelRepoImpl implements HotelRepo {
 
     @Override
     public List<HotelDTO> getHotels(SearchHotelDatesDTO searchHotelDatesDTO) {
-        for (HotelDTO hotelDTO:database.getHotelsDatabase()) {
-            System.out.println(searchHotelDatesDTO.getDateFrom());
-            System.out.println("La fecha a ver es "+ hotelDTO.getAvailableFrom()+ " en "+ hotelDTO.getHotelCode() );
-
-        }
         return database.getHotelsDatabase().stream().filter( hotelsFiltersFactory.getHotelsFilters( searchHotelDatesDTO ) ).collect( Collectors.toList());
-
     }
 
 

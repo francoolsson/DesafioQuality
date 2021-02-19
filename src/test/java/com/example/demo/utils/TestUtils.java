@@ -1,22 +1,22 @@
-package com.example.demo.component;
+package com.example.demo.utils;
 
-import com.example.demo.DTO.HotelDTO;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
-public class TestUtilsStatic<T> {
+public class TestUtils<T> {
 
-    public static List<HotelDTO> createListTest(String location){
+    public static <T> List<T> createListTest(String location, Class<T> elementClass){
         try {
             ObjectMapper mapper = new ObjectMapper();
-            List<HotelDTO> list = mapper.readValue(new File(location), new TypeReference<List<HotelDTO>>() {
-            });
+            CollectionType listType = mapper.getTypeFactory().constructCollectionType( ArrayList.class, elementClass );
+            List<T> list = mapper.readValue(new File(location), listType);
             return list;
         } catch (IOException e) {
             return null;
