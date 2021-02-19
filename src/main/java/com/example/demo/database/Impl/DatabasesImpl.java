@@ -1,7 +1,7 @@
 package com.example.demo.database.Impl;
 
 import com.example.demo.DTO.HotelDTO;
-import com.example.demo.Exceptions.ServerException;
+import com.example.demo.exceptions.ServerException;
 import com.example.demo.database.Database;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

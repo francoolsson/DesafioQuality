@@ -1,6 +1,5 @@
 package com.example.demo.DTO;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,36 +13,25 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.Date;
 
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HotelDTO {
+public class SearchHotelDatesDTO {
 
-    private String hotelCode;
-    private String name;
-    private String location;
-    private String roomType;
-    private Integer pricePerNight;
-    private Boolean reserved;
-
+    private String destination;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "es_AR", timezone = "America/Argentina/Buenos_Aires")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate availableFrom;
+    private LocalDate dateFrom;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy",locale = "es_AR", timezone = "America/Argentina/Buenos_Aires")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    private LocalDate availableUntil;
+    private LocalDate dateTo;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof HotelDTO)) return false;
-        HotelDTO hotel = (HotelDTO) obj;
-        return this.getHotelCode().equals( hotel.getHotelCode())
-                && this.getName().equals( hotel.getName() )
-                && this.getLocation().equals( hotel.getLocation() );
-    }
+
+
+
 
 }
