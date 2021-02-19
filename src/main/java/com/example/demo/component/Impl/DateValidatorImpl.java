@@ -8,14 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
+@Component
 public class DateValidatorImpl implements DateValidator {
 
-    private DateTimeFormatter dateTimeFormatter;
 
-    public DateValidatorImpl (String strForm){
+    DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern( "dd/MM/yyyy" );
 
-        this.dateTimeFormatter=DateTimeFormatter.ofPattern( strForm );
-    }
 
     @Override
     public boolean isValid(String dateStr) {

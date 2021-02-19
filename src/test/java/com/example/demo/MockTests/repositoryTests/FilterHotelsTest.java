@@ -1,4 +1,4 @@
-package com.example.demo.MockTests.repositoryTest;
+package com.example.demo.MockTests.repositoryTests;
 
 
 import com.example.demo.DTO.HotelDTO;
@@ -7,7 +7,6 @@ import com.example.demo.component.DateValidator;
 import com.example.demo.component.Impl.DateValidatorImpl;
 import com.example.demo.component.Impl.HotelsFilterFactoryImpl;
 import com.example.demo.database.Database;
-import com.example.demo.repository.HotelRepo;
 import com.example.demo.repository.Impl.HotelRepoImpl;
 import com.example.demo.utils.TestUtils;
 import org.junit.jupiter.api.*;
@@ -16,7 +15,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootTest
@@ -34,13 +32,13 @@ public class FilterHotelsTest {
 
 
     @BeforeEach
-    void setUpEach() {
+    void setUp() {
         this.hotelsFilterFactory = new HotelsFilterFactoryImpl();
         this.hotelRepoImpl = new HotelRepoImpl( database, hotelsFilterFactory );
         Mockito.when( database.getHotelsDatabase() ).thenReturn(
                 TestUtils.createListTest( "src/test/java/com/example/demo/component/HotelsList.json", HotelDTO.class )
         );
-        this.dateValidator = new DateValidatorImpl( "dd/MM/yyyy" );
+        this.dateValidator = new DateValidatorImpl();
         searchHotelDatesDTO = new SearchHotelDatesDTO();
         searchHotelDatesDTO.setDateFrom( null );
         searchHotelDatesDTO.setDateTo( null );

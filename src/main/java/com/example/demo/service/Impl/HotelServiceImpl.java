@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class HotelServiceImpl implements HotelService {
 
-    public HotelServiceImpl (@Autowired HotelRepo hotelRepo) {
+    public HotelServiceImpl (@Autowired HotelRepo hotelRepo, @Autowired DateValidator dateValidator) {
         this.hotelRepo=hotelRepo;
-        this.dateValidator= new DateValidatorImpl("dd/MM/yyyy");
+        this.dateValidator= dateValidator;
     }
     private final HotelRepo hotelRepo;
     private final DateValidator dateValidator;
