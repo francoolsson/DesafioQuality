@@ -1,14 +1,13 @@
-package com.example.demo.MockTests.serviceTests;
+package com.example.demo.mockTests.serviceTests;
 
-import com.example.demo.DTO.HotelDTO;
-import com.example.demo.DTO.SearchHotelDTO;
-import com.example.demo.DTO.SearchHotelDatesDTO;
+import com.example.demo.DTO.intern.HotelDTO;
+import com.example.demo.DTO.request.SearchHotelDTO;
+import com.example.demo.DTO.intern.SearchHotelDatesDTO;
 import com.example.demo.component.DateValidator;
 import com.example.demo.component.Impl.DateValidatorImpl;
 import com.example.demo.exceptions.DateException;
 import com.example.demo.exceptions.SearchHotelException;
 import com.example.demo.repository.HotelRepo;
-import com.example.demo.repository.Impl.HotelRepoImpl;
 import com.example.demo.service.HotelService;
 import com.example.demo.service.Impl.HotelServiceImpl;
 import org.junit.jupiter.api.Assertions;

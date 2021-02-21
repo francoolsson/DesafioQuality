@@ -1,8 +1,8 @@
-package com.example.demo.MockTests.repositoryTests;
+package com.example.demo.mockTests.repositoryTests;
 
 
-import com.example.demo.DTO.HotelDTO;
-import com.example.demo.DTO.SearchHotelDatesDTO;
+import com.example.demo.DTO.intern.HotelDTO;
+import com.example.demo.DTO.intern.SearchHotelDatesDTO;
 import com.example.demo.component.DateValidator;
 import com.example.demo.component.Impl.DateValidatorImpl;
 import com.example.demo.component.Impl.HotelsFilterFactoryImpl;
@@ -40,9 +40,6 @@ public class FilterHotelsTest {
         );
         this.dateValidator = new DateValidatorImpl();
         searchHotelDatesDTO = new SearchHotelDatesDTO();
-        searchHotelDatesDTO.setDateFrom( null );
-        searchHotelDatesDTO.setDateTo( null );
-        searchHotelDatesDTO.setDestination( null );
     }
 
     //Testeo que devuelva todos los hoteles, los cuales son 4 en total.

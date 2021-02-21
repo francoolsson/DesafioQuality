@@ -22,11 +22,11 @@ public class ExceptionController {
     }
 
     @ExceptionHandler(SearchHotelException.class)
-    public ResponseEntity<ResponseHotelDTO> handleException(SearchHotelException searchHotelException){
-        ResponseHotelDTO responseHotelDTO = new ResponseHotelDTO();
-        responseHotelDTO.setCode( 404 );
-        responseHotelDTO.setStatus( searchHotelException.getMessage() );
-        return new ResponseEntity<>( responseHotelDTO, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorDTO> handleException(SearchHotelException searchHotelException){
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setCode( 404 );
+        errorDTO.setStatus( searchHotelException.getMessage() );
+        return new ResponseEntity<>( errorDTO, HttpStatus.NOT_FOUND);
     }
 
 }

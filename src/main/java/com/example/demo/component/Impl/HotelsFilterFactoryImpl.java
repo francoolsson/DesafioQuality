@@ -1,7 +1,7 @@
 package com.example.demo.component.Impl;
 
-import com.example.demo.DTO.HotelDTO;
-import com.example.demo.DTO.SearchHotelDatesDTO;
+import com.example.demo.DTO.intern.HotelDTO;
+import com.example.demo.DTO.intern.SearchHotelDatesDTO;
 import com.example.demo.component.HotelsFiltersFactory;
 import org.springframework.stereotype.Component;
 

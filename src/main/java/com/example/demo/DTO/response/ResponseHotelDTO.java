@@ -1,6 +1,6 @@
 package com.example.demo.DTO.response;
 
-import com.example.demo.DTO.HotelDTO;
+import com.example.demo.DTO.intern.HotelDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
