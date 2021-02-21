@@ -55,6 +55,7 @@ public class GetHotelTest {
         responseHotelDTO = hotelService.getHotels( searchHotelDTO );
         Assertions.assertEquals( 200, responseHotelDTO.getCode() );
         Assertions.assertEquals( "ok",responseHotelDTO.getStatus() );
+        Assertions.assertEquals( 4,responseHotelDTO.getHotels().size() );
     }
 
 
