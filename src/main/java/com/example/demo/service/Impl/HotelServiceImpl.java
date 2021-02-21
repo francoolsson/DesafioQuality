@@ -1,5 +1,6 @@
 package com.example.demo.service.Impl;
 
+import com.example.demo.DTO.HotelDTO;
 import com.example.demo.DTO.SearchHotelDTO;
 import com.example.demo.DTO.SearchHotelDatesDTO;
 import com.example.demo.DTO.response.ResponseHotelDTO;
@@ -11,6 +12,8 @@ import com.example.demo.repository.HotelRepo;
 import com.example.demo.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class HotelServiceImpl implements HotelService {
@@ -46,6 +49,8 @@ public class HotelServiceImpl implements HotelService {
             }
         }
         searchHotelDatesDTO.setDestination( searchHotelDTO.getDestination() );
+        List<HotelDTO> test = hotelRepo.getHotels( searchHotelDatesDTO );
+        Integer sizeTest = test.size();
         if (hotelRepo.getHotels( searchHotelDatesDTO ).isEmpty()) {
             throw new SearchHotelException("There are no matches with the search");
         }
