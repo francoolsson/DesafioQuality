@@ -50,8 +50,6 @@ public class GetHotelTest {
         Mockito.when( hotelRepo.getHotels( any(SearchHotelDatesDTO.class) ) ).thenReturn(
                 TestUtils.createListTest( "src/test/java/com/example/demo/component/HotelsList.json", HotelDTO.class )
         );
-        List<HotelDTO> testbis=TestUtils.createListTest( "src/test/java/com/example/demo/component/HotelsList.json", HotelDTO.class );
-        List<HotelDTO> test = hotelRepo.getHotels( searchHotelDatesDTO );
         responseHotelDTO = hotelService.getHotels( searchHotelDTO );
         Assertions.assertEquals( 200, responseHotelDTO.getCode() );
         Assertions.assertEquals( "ok",responseHotelDTO.getStatus() );

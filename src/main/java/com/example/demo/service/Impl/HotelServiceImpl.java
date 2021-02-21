@@ -49,8 +49,6 @@ public class HotelServiceImpl implements HotelService {
             }
         }
         searchHotelDatesDTO.setDestination( searchHotelDTO.getDestination() );
-        List<HotelDTO> test = hotelRepo.getHotels( searchHotelDatesDTO );
-        Integer sizeTest = test.size();
         if (hotelRepo.getHotels( searchHotelDatesDTO ).isEmpty()) {
             throw new SearchHotelException("There are no matches with the search");
         }
