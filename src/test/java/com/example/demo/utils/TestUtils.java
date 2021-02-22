@@ -19,6 +19,7 @@ public class TestUtils<T> {
             List<T> list = mapper.readValue(new File(location), listType);
             return list;
         } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }

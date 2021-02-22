@@ -1,5 +1,6 @@
 package com.example.demo.database.Impl;
 
+import com.example.demo.DTO.intern.FlightDTO;
 import com.example.demo.DTO.intern.HotelDTO;
 import com.example.demo.DTO.response.ResponseBookingDTO;
 import com.example.demo.exceptions.ServerException;
@@ -22,6 +23,7 @@ public class DatabasesImpl implements Database {
     private final ObjectMapper objectMapper;
     private final Map<String,HotelDTO> hotelsDatabase;
     private final List<ResponseBookingDTO> bookingDatabase;
+    private final Map<String, FlightDTO> flightsDatabase;
 
 
     private Map <String,HotelDTO> loadHotelsDatabase() throws ServerException {
@@ -37,11 +39,27 @@ public class DatabasesImpl implements Database {
         return hotelsDatabase;
     }
 
+    private Map <String,FlightDTO> loadFlightDatabase() throws ServerException {
+        Map <String,FlightDTO> flightsDatabase = new HashMap<>();
+        List<FlightDTO> flights;
+        try{
+            flights=objectMapper.readValue(new File( "src/main/java/com/example/demo/database/flights.json"),
+                    new TypeReference<>(){});
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new ServerException("Flights Database is unavailable");}
+        for (FlightDTO flightDTO: flights){
+            flightsDatabase.put( flightDTO.getFlightNumber(), flightDTO);
+        }
+        return flightsDatabase;
+    }
+
 
     public DatabasesImpl(){
         this.objectMapper= new ObjectMapper();
         this.hotelsDatabase=loadHotelsDatabase();
         this.bookingDatabase=new ArrayList<>();
+        this.flightsDatabase=loadFlightDatabase();
     }
 
 
@@ -73,5 +91,10 @@ public class DatabasesImpl implements Database {
     @Override
     public List<ResponseBookingDTO> getAllBooking() {
         return bookingDatabase;
+    }
+
+    @Override
+    public List<FlightDTO> getFlightsDatabase() {
+       return flightsDatabase.values().stream().collect( Collectors.toList());
     }
 }
