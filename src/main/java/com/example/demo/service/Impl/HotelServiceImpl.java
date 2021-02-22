@@ -18,11 +18,12 @@ import com.example.demo.exceptions.DateException;
 import com.example.demo.exceptions.SearchHotelException;
 import com.example.demo.repository.HotelRepo;
 import com.example.demo.service.HotelService;
-import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,13 +57,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public ResponseBookingDTO getBooking(UserBookingDTO userBookingDTO) {
 
-        if (!(bookingValidator.mailValidator( userBookingDTO.getUserName() )) || userBookingDTO.getUserName().isEmpty())
-            throw new BookingException("Email is not valid");
-        if (!(bookingValidator.peopleQuantity( userBookingDTO.getBooking() )))
-            throw new BookingException("People´s list do not equal people amount");
-        if(!(bookingValidator.peopleValidator( userBookingDTO.getBooking().getPeople() )))
-            throw new BookingException(("All the people on the list must have the following complete fields: name, surname, DNI and date of birth."));
-
+        firstBookingValidator( userBookingDTO );
         BookingDTO bookingDTO = userBookingDTO.getBooking();
         SearchHotelDTO searchHotelDTO = new SearchHotelDTO();
         searchHotelDTO.setDestination( bookingDTO.getDestination() );
@@ -74,6 +69,7 @@ public class HotelServiceImpl implements HotelService {
                 collect( Collectors.toList());
         if (hotels.size()!=1) throw new BookingException("Probably hotel´s code error");
         HotelDTO hotelDTO = hotels.get( 0 );
+        roomBookingValidator( bookingDTO,hotelDTO );
         ReservedDatesDTO reservedDatesDTO = new ReservedDatesDTO();
         reservedDatesDTO.setDateTo( dateValidator.strToLocalDate( bookingDTO.getDateTo() ) );
         reservedDatesDTO.setDateFrom( dateValidator.strToLocalDate( bookingDTO.getDateFrom() ) );
@@ -86,6 +82,10 @@ public class HotelServiceImpl implements HotelService {
         responseBookingDTO.setBooking( bookingDTO );
         responseBookingDTO.setStatusCode( statusDTO );
         responseBookingDTO.setUserName( userBookingDTO.getUserName() );
+        responseBookingDTO.setInterest( getInterest( bookingDTO.getPaymentMethod().getDues() ) );
+        responseBookingDTO.setAmount(hotelDTO.getPricePerNight().doubleValue() );
+        responseBookingDTO.setTotalDays( ChronoUnit.DAYS.between( reservedDatesDTO.getDateFrom(), reservedDatesDTO.getDateTo()));
+        responseBookingDTO.setTotal( responseBookingDTO.getTotalDays()*responseBookingDTO.getAmount()*(100+responseBookingDTO.getInterest())/100 );
         return responseBookingDTO;
     }
 
@@ -116,4 +116,34 @@ public class HotelServiceImpl implements HotelService {
         }
         return searchHotelDatesDTO;
     }
+
+    private void firstBookingValidator(UserBookingDTO userBookingDTO){
+
+        if (!(bookingValidator.mailValidator( userBookingDTO.getUserName() )) || userBookingDTO.getUserName().isEmpty())
+            throw new BookingException("Email is not valid");
+        if (!(bookingValidator.peopleQuantity( userBookingDTO.getBooking() )))
+            throw new BookingException("People´s list do not equal people amount");
+        if (!(bookingValidator.peopleValidator( userBookingDTO.getBooking().getPeople() )))
+            throw new BookingException("All the people on the list must have the following complete fields: name, surname, DNI and date of birth.");
+        if (!(bookingValidator.paymentValidator( userBookingDTO.getBooking().getPaymentMethod() )))
+            throw new BookingException("Payment Error");
+    }
+
+    private void roomBookingValidator(BookingDTO bookingDTO, HotelDTO hotelDTO){
+        if ((hotelDTO.getRoomType().toLowerCase().matches( "single" )
+        && bookingDTO.getPeopleAmount()>1)
+                || (hotelDTO.getRoomType().toLowerCase().matches( "double" )
+                && bookingDTO.getPeopleAmount()>2)
+                || (hotelDTO.getRoomType().toLowerCase().matches( "triple" )
+                && bookingDTO.getPeopleAmount()>3)
+        ) throw new BookingException("People amount exceed room´s disponibility");
+    }
+
+    private Double getInterest(Integer dues){
+        if (dues<=3) return 0.0;
+        if (dues>3 && dues<=6) return 5.5;
+        return 12.0;
+    }
+
+
 }

@@ -4,6 +4,7 @@ package com.example.demo.mockTests.integrationTest;
 import com.example.demo.DTO.intern.HotelDTO;
 import com.example.demo.DTO.intern.ReservedDatesDTO;
 import com.example.demo.DTO.intern.SearchHotelDatesDTO;
+import com.example.demo.DTO.request.SearchHotelDTO;
 import com.example.demo.DTO.request.UserBookingDTO;
 import com.example.demo.DTO.response.ResponseBookingDTO;
 import com.example.demo.component.DateValidator;
@@ -35,6 +36,7 @@ public class BookingTest {
     ReservedDatesDTO reservedDatesDTO;
     HotelService hotelService;
     UserBookingDTO userBookingDTO;
+    SearchHotelDTO searchHotelDTO;
 
 
     @BeforeEach
@@ -44,6 +46,7 @@ public class BookingTest {
         this.hotelRepoImpl = new HotelRepoImpl( database, hotelsFilterFactory );
         this.dateValidator = new DateValidatorImpl();
         this.searchHotelDatesDTO = new SearchHotelDatesDTO();
+        this.searchHotelDTO= new SearchHotelDTO();
         this.reservedDatesDTO = new ReservedDatesDTO();
         this.hotelService=new HotelServiceImpl( hotelRepoImpl );
         this.userBookingDTO= TestUtils.createObjectTest( "src/test/java/com/example/demo/component/bookingList.json", UserBookingDTO.class );
@@ -53,7 +56,7 @@ public class BookingTest {
     void setBookingTest () {
 
         ResponseBookingDTO responseBookingDTO = hotelService.getBooking( userBookingDTO );
-        System.out.println(responseBookingDTO.getUserName());
+        Assertions.assertEquals( 13, hotelService.getHotels(searchHotelDTO).getHotels().size() );
 
     }
 

@@ -1,12 +1,14 @@
 package com.example.demo.component.Impl;
 
 import com.example.demo.DTO.intern.BookingDTO;
+import com.example.demo.DTO.intern.PaymentDTO;
 import com.example.demo.DTO.intern.PersonDTO;
 import com.example.demo.component.BookingValidator;
 import com.example.demo.exceptions.BookingException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class BookingValidatorImpl implements BookingValidator {
@@ -30,6 +32,18 @@ public class BookingValidatorImpl implements BookingValidator {
             if (personDTO.getBirthDate()==null || personDTO.getSurname()==null
             || personDTO.getName()==null || personDTO.getDni()==null) return false;
         }
+        return true;
+    }
+
+    @Override
+    public boolean paymentValidator(PaymentDTO paymentDTO) {
+        if (!(paymentDTO.getNumber().matches( "^[1-9][0-9]{3}(-[0-9]{4}){3}$" ))) return false;
+        if (!(paymentDTO.getType().toLowerCase().matches( "credit" ))&&
+                (paymentDTO.getType().toLowerCase().matches("debit" ))&&
+                (paymentDTO.getType().toLowerCase().matches("cash"))) return false;
+        if (paymentDTO.getType().toLowerCase().matches("credit")){
+            if (paymentDTO.getDues()<1 || paymentDTO.getDues()>12) return false;}
+        else {if (paymentDTO.getDues()!=1) return false;};
         return true;
     }
 }

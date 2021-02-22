@@ -24,7 +24,7 @@
       }
     ],
     "paymentMethod": {
-      "type": "CREDIT",
+      "type": "credit",
       "number": "1234-1234-1234-1234",
       "dues": 6
     }

@@ -13,11 +13,11 @@ import lombok.Setter;
 public class ResponseBookingDTO {
 
     private String userName;
-    private Float amount;
-    private Float interest;
-    private Float total;
+    private Long totalDays;
+    private Double amount;
+    private Double interest;
+    private Double total;
     private BookingDTO booking;
     private StatusDTO statusCode;
-
 
 }
