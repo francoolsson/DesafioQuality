@@ -63,6 +63,7 @@ public class HotelServiceImpl implements HotelService {
         searchHotelDTO.setDestination( bookingDTO.getDestination() );
         searchHotelDTO.setDateTo( bookingDTO.getDateTo() );
         searchHotelDTO.setDateFrom( bookingDTO.getDateFrom() );
+        searchHotelDTO.setHotelCode( bookingDTO.getHotelCode() );
         List<HotelDTO> hotels= getHotels( searchHotelDTO ).getHotels();
         if (hotels.isEmpty()) throw new BookingException("Filters Error");
         hotels=hotels.stream().filter( u -> u.getHotelCode().contains( bookingDTO.getHotelCode())).
@@ -79,6 +80,7 @@ public class HotelServiceImpl implements HotelService {
         statusDTO.setStatus( "ok" );
         statusDTO.setCode( 200 );
         ResponseBookingDTO responseBookingDTO = new ResponseBookingDTO();
+        bookingDTO.setRoomType( hotelDTO.getRoomType() );
         responseBookingDTO.setBooking( bookingDTO );
         responseBookingDTO.setStatusCode( statusDTO );
         responseBookingDTO.setUserName( userBookingDTO.getUserName() );
@@ -86,7 +88,13 @@ public class HotelServiceImpl implements HotelService {
         responseBookingDTO.setAmount(hotelDTO.getPricePerNight().doubleValue() );
         responseBookingDTO.setTotalDays( ChronoUnit.DAYS.between( reservedDatesDTO.getDateFrom(), reservedDatesDTO.getDateTo()));
         responseBookingDTO.setTotal( responseBookingDTO.getTotalDays()*responseBookingDTO.getAmount()*(100+responseBookingDTO.getInterest())/100 );
+        hotelRepo.saveBooking( responseBookingDTO );
         return responseBookingDTO;
+    }
+
+    @Override
+    public List<ResponseBookingDTO> getAllBooking() {
+        return hotelRepo.getAllBooking();
     }
 
     private SearchHotelDatesDTO searchDTOValidator (SearchHotelDTO searchHotelDTO){
@@ -94,7 +102,7 @@ public class HotelServiceImpl implements HotelService {
         SearchHotelDatesDTO searchHotelDatesDTO = new SearchHotelDatesDTO();
         if (searchHotelDTO.getDateFrom() != null){
             if (dateValidator.isValid( searchHotelDTO.getDateFrom() )) {
-                searchHotelDatesDTO.setDateFrom(dateValidator.strToLocalDate( searchHotelDTO.getDateFrom() ).plusDays( 1 ));
+                searchHotelDatesDTO.setDateFrom(dateValidator.strToLocalDate( searchHotelDTO.getDateFrom() ));
             }
             else throw new DateException("Invalid Date From");
         }
@@ -111,6 +119,7 @@ public class HotelServiceImpl implements HotelService {
             }
         }
         searchHotelDatesDTO.setDestination( searchHotelDTO.getDestination() );
+        searchHotelDatesDTO.setHotelCode( searchHotelDTO.getHotelCode() );
         if (hotelRepo.getHotels( searchHotelDatesDTO ).isEmpty()) {
             throw new SearchHotelException("There are no matches with the search");
         }

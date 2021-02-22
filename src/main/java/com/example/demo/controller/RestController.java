@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1")
 public class RestController {
@@ -28,5 +30,11 @@ public class RestController {
     public ResponseBookingDTO getBooking(@RequestBody UserBookingDTO userBookingDTO){
         return hotelService.getBooking( userBookingDTO );
     }
+
+    @GetMapping("/allbooking")
+    public List<ResponseBookingDTO> getAllBooking (){
+        return hotelService.getAllBooking();
+    }
+
 
 }

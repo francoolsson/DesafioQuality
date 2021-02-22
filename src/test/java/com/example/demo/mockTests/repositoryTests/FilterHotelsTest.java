@@ -91,7 +91,7 @@ public class FilterHotelsTest {
     @Test
     void filterNoneDateToHotels() {
 
-        LocalDate localDate =dateValidator.strToLocalDate( "15/10/2021" );
+        LocalDate localDate =dateValidator.strToLocalDate( "16/10/2021" );
         searchHotelDatesDTO.setDateTo( localDate );
         hotels = hotelRepoImpl.getHotels( searchHotelDatesDTO );
         Assertions.assertEquals( 0, hotels.size() );

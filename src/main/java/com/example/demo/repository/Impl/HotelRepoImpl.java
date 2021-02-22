@@ -3,6 +3,7 @@ package com.example.demo.repository.Impl;
 import com.example.demo.DTO.intern.HotelDTO;
 import com.example.demo.DTO.intern.ReservedDatesDTO;
 import com.example.demo.DTO.intern.SearchHotelDatesDTO;
+import com.example.demo.DTO.response.ResponseBookingDTO;
 import com.example.demo.database.Database;
 import com.example.demo.repository.HotelRepo;
 import com.example.demo.component.HotelsFiltersFactory;
@@ -44,9 +45,19 @@ public class HotelRepoImpl implements HotelRepo {
             hotelDTO.setAvailableUntil( reservedDatesDTO.getDateFrom() );
             hotelDTO1.setHotelCode( hotelDTO1.getHotelCode()+"-1" );
             hotelDTO1.setAvailableFrom( reservedDatesDTO.getDateTo() );
-            database.addHotel( hotelDTO );
-            database.addHotel( hotelDTO1 );
+            if (!(hotelDTO.getAvailableFrom().equals( hotelDTO.getAvailableUntil() ))) database.addHotel( hotelDTO );
+            if (!(hotelDTO1.getAvailableFrom().equals( hotelDTO1.getAvailableUntil() ))) database.addHotel( hotelDTO1 );
         }
     }
 
+
+    @Override
+    public void saveBooking(ResponseBookingDTO responseBookingDTO) {
+        database.saveBooking( responseBookingDTO );
+    }
+
+    @Override
+    public List<ResponseBookingDTO> getAllBooking() {
+        return database.getAllBooking();
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.database.Impl;
 
 import com.example.demo.DTO.intern.HotelDTO;
+import com.example.demo.DTO.response.ResponseBookingDTO;
 import com.example.demo.exceptions.ServerException;
 import com.example.demo.database.Database;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,7 @@ public class DatabasesImpl implements Database {
 
     private final ObjectMapper objectMapper;
     private final Map<String,HotelDTO> hotelsDatabase;
+    private final List<ResponseBookingDTO> bookingDatabase;
 
 
     private Map <String,HotelDTO> loadHotelsDatabase() throws ServerException {
@@ -38,6 +41,7 @@ public class DatabasesImpl implements Database {
     public DatabasesImpl(){
         this.objectMapper= new ObjectMapper();
         this.hotelsDatabase=loadHotelsDatabase();
+        this.bookingDatabase=new ArrayList<>();
     }
 
 
@@ -59,5 +63,15 @@ public class DatabasesImpl implements Database {
     @Override
     public HotelDTO getHotel(String code) {
         return hotelsDatabase.get( code );
+    }
+
+    @Override
+    public void saveBooking(ResponseBookingDTO responseBookingDTO) {
+        bookingDatabase.add( responseBookingDTO );
+    }
+
+    @Override
+    public List<ResponseBookingDTO> getAllBooking() {
+        return bookingDatabase;
     }
 }

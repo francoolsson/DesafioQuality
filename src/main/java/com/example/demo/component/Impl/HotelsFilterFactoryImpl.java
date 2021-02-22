@@ -23,13 +23,16 @@ public class HotelsFilterFactoryImpl implements HotelsFiltersFactory {
         List<Predicate<HotelDTO>> filters = new ArrayList<>();
 
         if (searchHotelDatesDTO.getDestination() != null)
-            filters.add(p->p.getLocation().toLowerCase( Locale.ROOT ).contains( searchHotelDatesDTO.getDestination().toLowerCase( Locale.ROOT ) ));
+            filters.add(p->p.getLocation().toLowerCase( ).contains( searchHotelDatesDTO.getDestination().toLowerCase() ));
 
         if (searchHotelDatesDTO.getDateFrom() != null)
-            filters.add(p->p.getAvailableFrom().isBefore( searchHotelDatesDTO.getDateFrom() ));
+            filters.add(p->p.getAvailableFrom().isBefore( searchHotelDatesDTO.getDateFrom().plusDays( 1 )));
 
         if (searchHotelDatesDTO.getDateTo() != null)
-            filters.add(p->p.getAvailableUntil().isAfter( searchHotelDatesDTO.getDateTo() ));
+            filters.add(p->p.getAvailableUntil().plusDays( 1 ).isAfter( searchHotelDatesDTO.getDateTo() ));
+
+        if (searchHotelDatesDTO.getHotelCode() != null)
+            filters.add(p->p.getHotelCode().toLowerCase( ).contains( searchHotelDatesDTO.getHotelCode().toLowerCase() ));
 
         return filters;
     }

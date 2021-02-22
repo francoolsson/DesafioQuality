@@ -22,8 +22,8 @@ public class SearchHotelDTO {
 
 
     private String destination;
+    private String hotelCode;
     private String dateFrom;
     private String dateTo;
-
 
 }

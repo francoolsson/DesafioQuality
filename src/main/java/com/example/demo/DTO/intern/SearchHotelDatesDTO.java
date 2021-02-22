@@ -21,6 +21,7 @@ import java.util.Date;
 public class SearchHotelDatesDTO {
 
     private String destination;
+    private String hotelCode;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "es_AR", timezone = "America/Argentina/Buenos_Aires")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
