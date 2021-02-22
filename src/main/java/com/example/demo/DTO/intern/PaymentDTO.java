@@ -1,4 +1,4 @@
-package com.example.demo.DTO.response;
+package com.example.demo.DTO.intern;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorDTO {
-    private String status;
-    private Integer code;
+public class PaymentDTO {
+
+    private String type;
+    private String number;
+    private Integer dues;
+
 }

@@ -27,15 +27,13 @@ public class GetHotelTest {
     private HotelRepo hotelRepo;
 
     HotelService hotelService;
-    DateValidator dateValidator;
     SearchHotelDTO searchHotelDTO;
     ResponseHotelDTO responseHotelDTO;
     SearchHotelDatesDTO searchHotelDatesDTO;
 
     @BeforeEach
     void setUp(){
-        this.dateValidator=new DateValidatorImpl();
-        this.hotelService= new HotelServiceImpl( hotelRepo,dateValidator );
+        this.hotelService= new HotelServiceImpl( hotelRepo);
         this.searchHotelDTO = new SearchHotelDTO();
         this.searchHotelDatesDTO = new SearchHotelDatesDTO();
     }
@@ -45,7 +43,7 @@ public class GetHotelTest {
     void respondeHotelTest (){
 
         Mockito.when( hotelRepo.getHotels( any(SearchHotelDatesDTO.class) ) ).thenReturn(
-                TestUtils.createListTest( "src/test/java/com/example/demo/component/HotelsList.json", HotelDTO.class )
+                TestUtils.createListTest( "src/test/java/com/example/demo/component/hotelsList.json", HotelDTO.class )
         );
         responseHotelDTO = hotelService.getHotels( searchHotelDTO );
         Assertions.assertEquals( 200, responseHotelDTO.getCode() );

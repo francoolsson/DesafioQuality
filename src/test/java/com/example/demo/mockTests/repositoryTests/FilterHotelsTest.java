@@ -36,7 +36,7 @@ public class FilterHotelsTest {
         this.hotelsFilterFactory = new HotelsFilterFactoryImpl();
         this.hotelRepoImpl = new HotelRepoImpl( database, hotelsFilterFactory );
         Mockito.when( database.getHotelsDatabase() ).thenReturn(
-                TestUtils.createListTest( "src/test/java/com/example/demo/component/HotelsList.json", HotelDTO.class )
+                TestUtils.createListTest( "src/test/java/com/example/demo/component/hotelsList.json", HotelDTO.class )
         );
         this.dateValidator = new DateValidatorImpl();
         searchHotelDatesDTO = new SearchHotelDatesDTO();

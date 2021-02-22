@@ -27,14 +27,12 @@ public class GetHotelExceptionsTest {
     HotelRepo hotelRepo;
 
     HotelService hotelService;
-    DateValidator dateValidator;
     SearchHotelDTO searchHotelDTO;
     SearchHotelDatesDTO searchHotelDatesDTO;
 
     @BeforeEach
     void setUp(){
-        this.dateValidator=new DateValidatorImpl();
-        this.hotelService= new HotelServiceImpl( hotelRepo,dateValidator );
+        this.hotelService= new HotelServiceImpl( hotelRepo);
         this.searchHotelDTO = new SearchHotelDTO();
         this.searchHotelDatesDTO = new SearchHotelDatesDTO();
     }

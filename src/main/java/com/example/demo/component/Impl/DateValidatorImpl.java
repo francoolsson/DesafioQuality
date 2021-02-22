@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 
-@Component
+
 public class DateValidatorImpl implements DateValidator {
 
 

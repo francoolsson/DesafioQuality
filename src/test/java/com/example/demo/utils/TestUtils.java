@@ -23,6 +23,17 @@ public class TestUtils<T> {
         }
     }
 
+    public static <T> T createObjectTest(String location, Class<T> elementClass){
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            T object = mapper.readValue(new File(location), elementClass);
+            return object;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String convertObjectAsString(Object objectToTransform) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         String result = objectMapper.writeValueAsString(objectToTransform);
